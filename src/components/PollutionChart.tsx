@@ -1,0 +1,64 @@
+import React from "react";
+import { Line } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { chartData } from "../data/chartData";
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
+
+const labels = chartData.map((data) => data.date);
+const dataValue = chartData.map((data) => data.value);
+
+const LineChart: React.FC = () => {
+  const data = {
+    labels: labels,
+    datasets: [
+      {
+        label: "Air Quality in Germany",
+        data: dataValue,
+        fill: false,
+        borderColor: "rgba(75,192,192,1)",
+        tension: 0.1,
+      },
+    ],
+  };
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top" as const,
+      },
+      title: {
+        display: true,
+        text: "Air Quality Over Time in Germany",
+      },
+    },
+  };
+
+  return (
+    <>
+      <div className="line-chart">
+        <Line data={data} options={options} />
+      </div>
+    </>
+  );
+};
+
+export default LineChart;
