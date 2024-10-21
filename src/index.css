@@ -1,5 +1,5 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'abril-fatface, open sans';
   line-height: 1.5;
   font-weight: 400;
 
@@ -20,14 +20,6 @@ a {
 }
 a:hover {
   color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
 }
 
 h1 {
@@ -69,8 +61,65 @@ button:focus-visible {
 
 h1 {
   text-align: center;
+  font-family: 'abril-fatface';
+}
+
+h2  {
+  text-align: center;
+  font-family: 'abril-fatface';
+}
+
+h3 {
+  text-align: center;
+}
+
+p {
+  font-family: 'open sans';
+  margin: 0 auto;
+  width: 500px;
+  margin-bottom: 30px;
+}
+
+.address-content-container {
+  display: flex;
+  margin-left: 30px;
+  display: inline-block;
 }
 
 .line-chart {
   width: 95vw;
+}
+
+nav {
+  display: flex;
+  justify-content: flex-end;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 20px;
+  margin-right: 10px;
+}
+
+a {
+  color: white;
+  font-weight: 600;
+}
+
+a:hover {
+  color: white;
+  text-decoration: underline;
+}
+
+.image-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+img {
+  width: 400px;
 }

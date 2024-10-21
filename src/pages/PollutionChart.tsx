@@ -54,9 +54,12 @@ const LineChart: React.FC = () => {
 
   return (
     <>
-      <div className="line-chart">
-        <Line data={data} options={options} />
-      </div>
+      <section>
+        <div className="line-chart">
+          <h2>Chart</h2>
+          <Line data={data} options={options} />
+        </div>
+      </section>
     </>
   );
 };

@@ -1,12 +1,11 @@
-import LineChart from './components/PollutionChart';
-
+import { RouterProvider } from "react-router-dom";
+import { router } from "./router";
 
 const App = () => {
   return (
-    <div className="App">
-      <h1>Air Quality in Germany</h1>
-      <LineChart />
-    </div>
+    <>
+    <RouterProvider router={router}></RouterProvider>
+    </>
   );
 };
 
