@@ -5,6 +5,7 @@ import { Home } from "./pages/Home";
 import { About } from "./pages/About";
 import LineChart from "./pages/PollutionChart";
 import { Contact } from "./pages/Contact";
+import { PollutionMap } from "./components/PollutionMap";
 
 export const router = createBrowserRouter([
     {
@@ -16,6 +17,10 @@ export const router = createBrowserRouter([
                 path: '/',
                 element: <Home></Home>
             }, 
+            {
+                path: '/map',
+                element: <PollutionMap></PollutionMap>
+            },
             {           
                 path: '/about',
                 element: <About></About>

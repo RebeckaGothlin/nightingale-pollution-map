@@ -123,3 +123,22 @@ a:hover {
 img {
   width: 400px;
 }
+
+.map-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 50px;
+}
+
+.leaflet-container {
+  width: calc(100vw - 100px);
+  height: calc(100vh - 100px);
+  margin: 0;
+}
+
+.grade-image {
+  width: calc(100vw - 100px);
+  margin: 0 0 50px;
+  display: block;
+}
