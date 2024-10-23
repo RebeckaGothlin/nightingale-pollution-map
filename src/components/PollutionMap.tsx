@@ -1,14 +1,10 @@
 import { MapContainer, TileLayer, Popup, CircleMarker } from "react-leaflet";
 import { germanData } from "../data/germanData";
-import { swedenData } from "../data/swedenData";
 import "leaflet/dist/leaflet.css";
-import { ILocations } from "../models/ILocations";
+import { locations } from "../data/locations";
 
 export const PollutionMap = () => {
   console.log(germanData);
-
-  const latestGermanyData = germanData[germanData.length - 1];
-  const latestSwedenData = swedenData[swedenData.length - 1];
 
   const getMarkerColor = (value: number) => {
     if (value < 12.5) return "#8EFF44";
@@ -17,23 +13,6 @@ export const PollutionMap = () => {
     if (value < 150) return "#DE0C4A";
     return "#580822";
   };
-
-  const locations: ILocations[] = [
-    {
-      country: "Germany",
-      center: [52.52, 13.405],
-      data: latestGermanyData,
-      radius: 1,
-      weight: 8,
-    },
-    {
-      country: "Sweden",
-      center: [59.334591, 18.06324],
-      data: latestSwedenData,
-      radius: 3,
-      weight: 5,
-    },
-  ];
 
   return (
     <>
@@ -53,44 +32,18 @@ export const PollutionMap = () => {
             <CircleMarker
               key={index}
               center={location.center}
-              radius={location.radius}
+              radius={1}
               fillColor="transparent"
               color={getMarkerColor(location.data.value)}
-              weight={location.weight}
+              weight={8}
               stroke={true}
             >
               <Popup>
-                PM₂.₅ {location.data.value.toFixed(2)} Date:{" "}
+                <strong>PM₂.₅:</strong> {location.data.value.toFixed(2)} <strong>Date:{" "}</strong>
                 {location.data.date}
               </Popup>
             </CircleMarker>
           ))}
-          {/* <CircleMarker
-            center={[52.52, 13.405]}
-            radius={1}
-            fillColor="transparent"
-            color={getMarkerColor(latestGermanyData.value)}
-            weight={8}
-            stroke={true}
-          >
-            <Popup>
-              PM₂.₅ {latestGermanyData.value.toFixed(2)}
-              {latestGermanyData.date}
-            </Popup>
-          </CircleMarker>
-
-          <CircleMarker
-            center={[59.334591, 18.06324]}
-            radius={3}
-            fillColor="transparent"
-            color={getMarkerColor(latestSwedenData.value)}
-            weight={5}
-            stroke={true}
-          >
-            <Popup>
-              PM₂.₅ {latestSwedenData.value.toFixed(2)} {latestSwedenData.date}
-            </Popup>
-          </CircleMarker> */}
         </MapContainer>
         <img
           className="grade-image"
