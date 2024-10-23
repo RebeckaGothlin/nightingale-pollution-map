@@ -10,7 +10,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { chartData } from "../data/chartData";
+import { germanData } from "../data/germanData";
 
 ChartJS.register(
   CategoryScale,
@@ -22,8 +22,8 @@ ChartJS.register(
   Legend
 );
 
-const labels = chartData.map((data) => data.date);
-const dataValue = chartData.map((data) => data.value);
+const labels = germanData.map((data) => data.date);
+const dataValue = germanData.map((data) => data.value);
 
 const LineChart: React.FC = () => {
   const data = {
