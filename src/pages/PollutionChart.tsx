@@ -33,7 +33,7 @@ const LineChart: React.FC = () => {
         label: "Air Quality in Germany",
         data: dataValue,
         fill: false,
-        borderColor: "rgba(75,192,192,1)",
+        borderColor: "#B52828",
         tension: 0.1,
       },
     ],
@@ -44,22 +44,32 @@ const LineChart: React.FC = () => {
     plugins: {
       legend: {
         position: "top" as const,
+        labels: {
+          font: {
+            size: 16,
+          },
+        },
       },
       title: {
         display: true,
         text: "Air Quality Over Time in Germany",
+        font: {
+          size: 30,
+        },
       },
     },
   };
 
   return (
     <>
-      <section>
-        <div className="line-chart">
-          <h2>Chart</h2>
-          <Line data={data} options={options} />
-        </div>
-      </section>
+      <div className="box-container">
+        <section>
+          <div className="line-chart">
+            <h2>Chart</h2>
+            <Line data={data} options={options} />
+          </div>
+        </section>
+      </div>
     </>
   );
 };
