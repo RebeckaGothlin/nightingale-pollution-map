@@ -4,7 +4,7 @@ export const Header = () => {
   return (
     <>
       <header>
-        <img src="../../public/nightingalelogo.svg" alt="nightingale logo" />
+        <img className="header-logo" src="../../public/nightingalelogo.svg" alt="nightingale logo" />
         <nav>
           <ul>
             <li>

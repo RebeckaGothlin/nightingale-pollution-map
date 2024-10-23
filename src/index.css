@@ -13,6 +13,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
 a {
   font-weight: 500;
   color: rgb(255, 255, 255);
@@ -54,6 +60,7 @@ button {
   color: black;
   cursor: pointer;
   transition: border-color 0.25s;
+  max-width: 100%;
 }
 button:hover {
   border-color: #646cff;
@@ -76,6 +83,12 @@ button:focus-visible {
   }
 }
 
+@media (min-width: 750px) {
+  .header-logo {
+    display: block !important;
+  }
+}
+
 header {
   display: flex;
   justify-content: space-between;
@@ -84,7 +97,15 @@ header {
   background-image: linear-gradient(#5f1111, #b52828);
   padding-left: 20px;
   padding-right: 20px;
+  width: 100vw;
+  margin: 0;
+  box-sizing: border-box;
 }
+
+.header-logo {
+  display: none;
+}
+
 h1 {
   text-align: center;
   font-family: "Inria Serif";
@@ -103,7 +124,7 @@ h3 {
 p {
   font-family: "Inria Sans";
   margin: 0 auto;
-  width: 500px;
+  width: calc(100vw - 230px);
   margin-bottom: 30px;
 }
 
