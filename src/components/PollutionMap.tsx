@@ -1,9 +1,45 @@
-import { MapContainer, TileLayer, Popup, CircleMarker } from "react-leaflet";
+import { MapContainer, TileLayer, Popup, CircleMarker, useMap } from "react-leaflet";
 import { germanData } from "../data/germanData";
 import "leaflet/dist/leaflet.css";
+import "@geoapify/leaflet-address-search-plugin/dist/L.Control.GeoapifyAddressSearch.min.css";
 import { locations } from "../data/locations";
+import '@geoapify/leaflet-address-search-plugin';
+import { useEffect, useState } from "react";
+import { ILocations } from "../models/ILocations";
+
+
+const MapUpdater = ({ center }: {center: [number, number ]}) => {
+  const map = useMap();
+  useEffect(() => {
+    map.setView(center, 6, { animate: true });
+  }, [center, map]);
+  return null;
+}
 
 export const PollutionMap = () => {
+  const [searchValue, setSearchValue] = useState("");
+  const [selectedLocation, setSelectedLocation] = useState<ILocations>();
+
+  const handleSearch = () => {
+    if (!searchValue.trim()) {
+      console.log('Enter a valid term');
+      return;
+    }
+
+    const locationFound = locations.find(location => 
+      location.country.toLowerCase() === searchValue.toLowerCase()
+    );
+
+    if (locationFound) {
+      setSelectedLocation(locationFound);
+      setSearchValue("");
+    } else {
+      console.log('Location not found');
+      setSelectedLocation(undefined);
+    }
+
+  }
+
   console.log(germanData);
 
   const getMarkerColor = (value: number) => {
@@ -18,16 +54,19 @@ export const PollutionMap = () => {
     <>
       <div className="map-container">
         <h2>POLLUTION MAP</h2>
+        <input type="text" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} />
+        <button onClick={handleSearch}>Search</button>
         <MapContainer
           center={[54.526, 15.2551]}
           zoom={4}
           scrollWheelZoom={true}
+          
         >
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-
+        
           {locations.map((location, index) => (
             <CircleMarker
               key={index}
@@ -38,13 +77,36 @@ export const PollutionMap = () => {
               weight={8}
               stroke={true}
             >
+              
               <Popup>
+                <strong>{location.country}</strong><br/>
                 <strong>PM₂.₅:</strong> {location.data.value.toFixed(2)}{" "}
                 <strong>Date: </strong>
                 {location.data.date}
               </Popup>
             </CircleMarker>
           ))}
+
+          {selectedLocation && <MapUpdater center={selectedLocation.center}/>}
+
+          {selectedLocation && (
+            <CircleMarker
+            center={selectedLocation.center}
+            radius={1}
+            fillColor="transparent"
+            color={getMarkerColor(selectedLocation.data.value)}
+            weight={8}
+            stroke={true}
+            >
+              <Popup autoPan={true}>
+                <strong>{selectedLocation.country}</strong><br/>
+                <strong>PM₂.₅:</strong> {selectedLocation.data.value.toFixed(2)}{" "}
+                <strong>Date: </strong>
+                {selectedLocation.data.date}
+              </Popup>
+
+            </CircleMarker>
+          )}
         </MapContainer>
 
         <img

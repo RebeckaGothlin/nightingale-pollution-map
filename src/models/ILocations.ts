@@ -1,7 +1,8 @@
-import { LatLngTuple } from "leaflet";
+// import { LatLngTuple } from "leaflet";
 
 export interface ILocations {
   country: string;
-  center: LatLngTuple;
+  // center: LatLngTuple;
+  center: [number, number];
   data: { value: number; date: string };
 }
